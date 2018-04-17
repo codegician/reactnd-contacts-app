@@ -1,29 +1,20 @@
-import React, { Component } from 'react';
-import ListContacts from './ListContacts.js';
-
+import React, { Component } from 'react'
+import ListContacts from './ListContacts.js'
+import * as ContactsAPI from ',/util/ContactsAPI'
 
 class App extends Component {
   state ={
-    contacts: [
-      {
-        "id": "karen",
-        "name": "Karen Isgrigg",
-        "handle": "karen_isgrigg",
-        "avatarURL": "http://localhost:5001/karen.jpg"
-      },
-      {
-        "id": "richard",
-        "name": "Richard Kalehoff",
-        "handle": "richardkalehoff",
-        "avatarURL": "http://localhost:5001/richard.jpg"
-      },
-      {
-        "id": "tyler",
-        "name": "Tyler McGinnis",
-        "handle": "tylermcginnis",
-        "avatarURL": "http://localhost:5001/tyler.jpg"
-      }
-    ]
+    contacts: [ ]
+  }
+
+  componentDidMount() {
+    ContactsAPI.getAll()
+    .then((contacts) => {
+      this.setState(() => ({
+        contacts 
+      }))
+    })
+
   }
 
     //Implement a way to remove a contact from the contacts array. Since the data is living inside of our App component we want to implement this removeContact component in there as well.
