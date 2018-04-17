@@ -11,12 +11,16 @@ import PropTypes from 'prop-types'
    state = {
      query: ''
    }
+
    updateQuery = (query) => {
      this.setState(() => ({
        query: query.trim()
      }))
    }
 
+   clearQuery = () => {
+     this.updateQuery('')
+   }
 
    render (){
      const { query } = this.state
@@ -39,6 +43,13 @@ import PropTypes from 'prop-types'
               onChange={(event) => this.updateQuery(event.target.value)}
               />
            </div>
+
+           {showingContacts.length !== contacts.length &&(
+              <div className = 'showing-contacts'>
+                <span> Now Showing {showingContacts.length} of {contacts.length}</span>
+                <button onClick={this.clearQuery}>Show all</button>
+              </div>
+           )}
 
            <ol className="contact-list">
              {showingContacts.map((contact) => (
