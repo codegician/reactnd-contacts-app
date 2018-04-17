@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom'
 
    render (){
      const { query } = this.state
-     const { contacts, onDeleteContact, onNavigate } = this.props
+     const { contacts, onDeleteContact } = this.props
 
      const showingContacts = query === ''
      ? contacts
