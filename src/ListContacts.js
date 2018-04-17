@@ -2,11 +2,13 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
  class ListContacts extends Component {
+
    static PropTypes = {
        contacts: PropTypes.array.isRequired,
        onDeleteContact: PropTypes.func.isRequired,
    }
-   state ={
+
+   state = {
      query: ''
    }
    updateQuery = (query) => {
@@ -19,17 +21,18 @@ import PropTypes from 'prop-types'
    render (){
      return(
 
-       <div className = 'ListContacts'>
+       <div className = 'list-contacts'>
          {JSON.stringify(this.state)}
            <div className='list-contacts-top'>
               <input
-              type="text"
               className="search-contacts"
+              type="text"
               placeholder='Search Contacts'
               value= {this.state.query}
               onChange={(event) => this.updateQuery(event.target.value)}
               />
            </div>
+
            <ol className="contact-list">
              {this.props.contacts.map((contact) => (
                <li key={contact.id} className='contact-list-item' >
