@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
  class ListContacts extends Component {
@@ -19,10 +19,17 @@ import PropTypes from 'prop-types'
 
 
    render (){
-     return(
+     const { query } = this.state
+     const { contacts, onDeleteContact } = this.props
 
+     const showingContacts = query === ''
+     ? contacts
+     : contacts.filter((c) => (
+       c.name.toLowerCase().includes(query.toLowerCase())
+     ))
+
+     return(
        <div className = 'list-contacts'>
-         {JSON.stringify(this.state)}
            <div className='list-contacts-top'>
               <input
               className="search-contacts"
@@ -34,7 +41,7 @@ import PropTypes from 'prop-types'
            </div>
 
            <ol className="contact-list">
-             {this.props.contacts.map((contact) => (
+             {showingContacts.map((contact) => (
                <li key={contact.id} className='contact-list-item' >
                  <div className='contact-avatar'
                    style={{
@@ -45,7 +52,7 @@ import PropTypes from 'prop-types'
                    <p>{contact.handle}</p>
                  </div>
                  <button
-                   onClick={() => this.props.onDeleteContact(contact)}
+                   onClick={() => onDeleteContact(contact)}
                    className='contact-remove'>
                    Remove
                  </button>
